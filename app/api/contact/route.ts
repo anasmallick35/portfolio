@@ -71,11 +71,11 @@ export async function POST(req: Request) {
   ].join("\n");
 
   const html = `<div style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:14px;line-height:1.6;color:#14161A">
-    <p style="margin:0 0 16px;font-size:11px;letter-spacing:.14em;color:#787F8C">PORTFOLIO · REQUEST FOR INFORMATION</p>
+    <p style="margin:0 0 16px;font-size:11px;letter-spacing:.14em;color:#5C6472">PORTFOLIO · REQUEST FOR INFORMATION</p>
     <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;margin-bottom:18px">
-      <tr><td style="padding:4px 18px 4px 0;color:#787F8C">NAME</td><td style="padding:4px 0"><strong>${esc(name)}</strong></td></tr>
-      <tr><td style="padding:4px 18px 4px 0;color:#787F8C">EMAIL</td><td style="padding:4px 0"><a href="mailto:${esc(email)}">${esc(email)}</a></td></tr>
-      <tr><td style="padding:4px 18px 4px 0;color:#787F8C">COMPANY</td><td style="padding:4px 0">${esc(company) || "—"}</td></tr>
+      <tr><td style="padding:4px 18px 4px 0;color:#5C6472">NAME</td><td style="padding:4px 0"><strong>${esc(name)}</strong></td></tr>
+      <tr><td style="padding:4px 18px 4px 0;color:#5C6472">EMAIL</td><td style="padding:4px 0"><a href="mailto:${esc(email)}">${esc(email)}</a></td></tr>
+      <tr><td style="padding:4px 18px 4px 0;color:#5C6472">COMPANY</td><td style="padding:4px 0">${esc(company) || "—"}</td></tr>
     </table>
     <div style="border-left:2px solid #C8C2B4;padding-left:14px;white-space:pre-wrap">${esc(message)}</div>
   </div>`;
