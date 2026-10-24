@@ -4,6 +4,7 @@ export type Component = {
   t: string;
   s: string;
   repo: string;
+  site?: string;
   d: string;
   parts: string[];
   stack: string[];
@@ -27,12 +28,8 @@ export const COMPONENTS: Component[] = [
     stack: ["listing ingest", "match engine", "resume pass", "UI"] },
   { pn: "A-04", t: "Mock Interview Prep", s: "INTERVIEW QUESTION GENERATION",
     repo: "https://github.com/anasmallick35/Mock-Interview-Prep#readme",
+    site: "https://mock-interview-prep-jjzq.vercel.app/",
     d: "Generates interview questions against a role and difficulty, with saved sessions and progress tracking. Typed end to end — GraphQL schema through to the React components.",
     parts: ["GRAPHQL", "POSTGRES", "REDUX-SAGA", "TAILWIND", "TS"],
     stack: ["schema", "generator", "session store", "UI"] },
-  { pn: "A-05", t: "Inventory Management", s: "MERN · FIRST FULL-STACK BUILD",
-    repo: "https://github.com/anasmallick35/inventory_frontend#readme",
-    d: "End-to-end inventory app with authentication, image-backed product management and email-confirmed password recovery. The project where I first had to own a whole system rather than a screen.",
-    parts: ["MONGODB", "EXPRESS", "REACT", "NODE"],
-    stack: ["auth", "products", "media", "recovery"] },
 ];

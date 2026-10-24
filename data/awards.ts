@@ -27,7 +27,7 @@ export const AWARDS: Award[] = [
     sum: "Built the features the demo needed under an urgent timeline, so it went out on schedule.",
     cite: "Anas played an important role in ensuring the customer demo was delivered successfully. He worked closely with the team to prepare the platform, address last-minute challenges, and keep progress aligned with customer timelines. His responsiveness and willingness to step in wherever needed strengthened coordination and kept execution seamless.",
     img: "/awards/appreciation.jpg" },
-  { q: 2, name: "SPECIAL RECOGNITION AWARD", short: "SPECIAL",
+  { q: 3, name: "SPECIAL RECOGNITION AWARD", short: "SPECIAL",
     t: "The v8 migration, owned end to end",
     sum: "For the Workflow Tools migration — 220k lines, 21 domains, v7 to v8.",
     cite: "A huge shoutout to Md Anas for his outstanding work on the WFT migration. Throughout the process, he navigated multiple technical challenges with strong ownership, tackling each one head-on and resolving them with persistence and technical excellence rather than deferring them elsewhere. His hands-on approach and steady focus ensured a smooth migration, leaving Workflow tools running on a more modern, maintainable stack.",

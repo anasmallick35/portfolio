@@ -81,7 +81,11 @@ strong{color:var(--ink);font-weight:620}
 .tb .k em{font-style:normal;color:var(--blu);font-size:1.05em}
 .tb>div{padding:11px 14px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);
   min-width:0}
-.tb>div .v{overflow-wrap:anywhere;hyphens:none}
+.tb>div .v{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* the email is the one value too long for a single column — it spans two,
+   which also makes the nine cells divide evenly into two rows of five */
+.tb>div.wide .v{font-size:.88rem}
+@media(min-width:900px){.tb>div.wide{grid-column:span 2}}
 .tb>div .v a{font-size:.9em}
 .tb .k{font-family:var(--font-jbm),monospace;font-size:8.5px;letter-spacing:.17em;color:var(--dim)}
 .tb .v{margin-top:5px;color:var(--ink);font-variation-settings:"wdth" 104,"wght" 600;font-size:.95rem;
@@ -186,19 +190,18 @@ strong{color:var(--ink);font-weight:620}
   font-size:8.5px;letter-spacing:.14em;color:var(--blu);border:1px solid var(--blu-soft);
   padding:5px 9px;text-decoration:none;transition:all .25s;margin-top:12px}
 .cmp .rd:hover{background:var(--blu);color:#fff;border-color:var(--blu)}
+.cmp .links{display:flex;gap:8px;flex-wrap:wrap}
 .cmp .pn{font-family:var(--font-jbm),monospace;font-size:9px;letter-spacing:.08em;color:var(--red)}
 .cmp .ttl{font-variation-settings:"wdth" 106,"wght" 620;color:var(--ink);font-size:1rem}
 .cmp .ttl small{display:block;font-family:var(--font-jbm),monospace;font-size:8.5px;letter-spacing:.1em;
   color:var(--dim);margin-top:3px;font-variation-settings:normal}
 .cmp .qty{font-family:var(--font-jbm),monospace;font-size:9px;letter-spacing:.12em;color:var(--dim);
   display:flex;align-items:center;gap:9px}
-.cmp .qty i{width:9px;height:9px;border:1px solid var(--ink);display:block;position:relative;
+.cmp .qty i{width:11px;height:11px;display:block;position:relative;
   transition:transform .35s cubic-bezier(.2,.85,.25,1)}
-.cmp .qty i::before,.cmp .qty i::after{content:"";position:absolute;background:var(--ink)}
-.cmp .qty i::before{left:3px;right:3px;top:4px;height:1px}
-.cmp .qty i::after{top:3px;bottom:3px;left:4px;width:1px;transition:opacity .3s}
-.cmp[aria-expanded="true"] .qty i{transform:rotate(90deg)}
-.cmp[aria-expanded="true"] .qty i::after{opacity:0}
+.cmp .qty i::before{content:"";position:absolute;left:1px;top:1px;width:7px;height:7px;
+  border-right:1.6px solid var(--ink);border-bottom:1.6px solid var(--ink);transform:rotate(45deg)}
+.cmp[aria-expanded="true"] .qty i{transform:rotate(180deg)}
 .cmp .exp{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.3,.8,.3,1)}
 .cmp[aria-expanded="true"] .exp{grid-template-rows:1fr}
 .cmp .exp>div{overflow:hidden}

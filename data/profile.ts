@@ -5,8 +5,6 @@ export const PROFILE = {
   from: "2025",
   tenure: "1 yr",
   location: "Bengaluru, IN",
-  focus: "Frontend",
-  focusNote: "platform",
   email: "anasmallick846@gmail.com",
   phone: "+91 62043 42084",
   phoneHref: "tel:+916204342084",

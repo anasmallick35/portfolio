@@ -33,7 +33,7 @@ export default function Sheet02Elevation() {
     sv.appendChild(defs);
 
     const SPAN = 900, X0 = (980 - SPAN) / 2;
-    const N = UPPER.length, G = 16, W = (SPAN - (N - 1) * G) / N, Y = 58, H = 62;
+    const N = UPPER.length, G = 16, W = (SPAN - (N - 1) * G) / N, Y = 52, H = 58;
     const groups: SVGGElement[] = [];
 
     const wire = (g: SVGGElement, i: number) => {
@@ -51,9 +51,9 @@ export default function Sheet02Elevation() {
       g.appendChild(E("rect", { class: "st-box", x, y: Y, width: W, height: H }));
       const a = E("text", { class: "st-l", x: x + W / 2, y: Y + 26 }); a.textContent = s.k; g.appendChild(a);
       const b = E("text", { class: "st-n", x: x + W / 2, y: Y + 44 }); b.textContent = s.g[0]; g.appendChild(b);
-      g.appendChild(E("circle", { class: "bal", cx: x + W / 2, cy: 24, r: 12 }));
-      const n = E("text", { class: "balt", x: x + W / 2, y: 24.5 }); n.textContent = String(i + 1); g.appendChild(n);
-      g.appendChild(E("line", { class: "dimln", x1: x + W / 2, y1: 36, x2: x + W / 2, y2: Y, stroke: "#C8C2B4" }));
+      g.appendChild(E("circle", { class: "bal", cx: x + W / 2, cy: 22, r: 11 }));
+      const n = E("text", { class: "balt", x: x + W / 2, y: 22.5 }); n.textContent = String(i + 1); g.appendChild(n);
+      g.appendChild(E("line", { class: "dimln", x1: x + W / 2, y1: 33, x2: x + W / 2, y2: Y, stroke: "#C8C2B4" }));
       const L = E("path", { class: "lead", d: `M${x + W / 2} ${Y + H} V${Y + H + 16}` });
       g.appendChild(L);
       L.style.setProperty("--L", String(L.getTotalLength()));
@@ -63,27 +63,25 @@ export default function Sheet02Elevation() {
     });
 
     /* grade line between the feature tier and the platform it stands on */
-    const GY = Y + H + 30;
+    const GY = Y + H + 24;
     sv.appendChild(E("line", { class: "ax", x1: X0 - 14, y1: GY, x2: X0 + SPAN + 14, y2: GY, stroke: "#14161A", "stroke-width": "1.4" }));
     for (let k = 0; k < 26; k++)
       sv.appendChild(E("line", { x1: X0 - 14 + k * 36, y1: GY, x2: X0 - 22 + k * 36, y2: GY + 8, stroke: "#C8C2B4", "stroke-width": ".9" }));
-    const gl = E("text", { class: "dimt", x: X0 + SPAN + 14, y: GY - 7, "text-anchor": "end", fill: "#787F8C" });
-    gl.textContent = "PLATFORM LAYERS BELOW"; sv.appendChild(gl);
-
-    const M = LOWER.length, LG = 16, LW = (SPAN - (M - 1) * LG) / M, LY = GY + 22, LH = 42;
+    const M = LOWER.length, LG = 16, LW = (SPAN - (M - 1) * LG) / M, LY = GY + 50, LH = 40;
     LOWER.forEach((s, j) => {
       const i = N + j, x = X0 + j * (LW + LG);
       const g = E("g", { class: "stage", tabindex: "0", role: "button", "aria-label": "Detail for " + s.k });
       g.appendChild(E("rect", { class: "hatch", x: x + 1, y: LY + 1, width: LW - 2, height: LH - 2 }));
       g.appendChild(E("rect", { class: "st-box", x, y: LY, width: LW, height: LH }));
-      const a = E("text", { class: "st-l", x: x + LW / 2, y: LY + 18 }); a.textContent = s.k.split(" · ")[0]; g.appendChild(a);
-      const b = E("text", { class: "st-n", x: x + LW / 2, y: LY + 32 }); b.textContent = s.g[0]; g.appendChild(b);
-      g.appendChild(E("circle", { class: "bal", cx: x + 16, cy: LY - 13, r: 11 }));
-      const n = E("text", { class: "balt", x: x + 16, y: LY - 12.5 }); n.textContent = String(i + 1); g.appendChild(n);
+      const a = E("text", { class: "st-l", x: x + LW / 2, y: LY + 16 }); a.textContent = s.k.split(" · ")[0]; g.appendChild(a);
+      const b = E("text", { class: "st-n", x: x + LW / 2, y: LY + 30 }); b.textContent = s.g[0]; g.appendChild(b);
+      g.appendChild(E("circle", { class: "bal", cx: x + LW / 2, cy: LY - 26, r: 11 }));
+      const n = E("text", { class: "balt", x: x + LW / 2, y: LY - 25.5 }); n.textContent = String(i + 1); g.appendChild(n);
+      g.appendChild(E("line", { class: "dimln", x1: x + LW / 2, y1: LY - 15, x2: x + LW / 2, y2: LY, stroke: "#C8C2B4" }));
       sv.appendChild(g); groups.push(g); wire(g, i);
     });
 
-    const dy = LY + LH + 32, x1 = X0, x2 = X0 + SPAN;
+    const dy = LY + LH + 30, x1 = X0, x2 = X0 + SPAN;
     sv.appendChild(E("line", { class: "dimln", x1, y1: dy - 12, x2: x1, y2: dy + 6 }));
     sv.appendChild(E("line", { class: "dimln", x1: x2, y1: dy - 12, x2: x2, y2: dy + 6 }));
     sv.appendChild(E("line", { class: "dimln", x1, y1: dy, x2: x2, y2: dy }));

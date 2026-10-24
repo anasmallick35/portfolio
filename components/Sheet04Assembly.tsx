@@ -43,7 +43,12 @@ function Row({ c, open, onToggle }: { c: Component; open: boolean; onToggle: () 
             <div>
               <p>{c.d}</p>
               <div className="parts">{c.parts.map((p) => <span key={p}>{p}</span>)}</div>
-              <a className="rd" href={c.repo} target="_blank" rel="noopener noreferrer">OPEN README ↗</a>
+              <div className="links">
+                <a className="rd" href={c.repo} target="_blank" rel="noopener noreferrer">OPEN README ↗</a>
+                {c.site && (
+                  <a className="rd" href={c.site} target="_blank" rel="noopener noreferrer">VISIT SITE ↗</a>
+                )}
+              </div>
             </div>
             <ExplodedView stack={c.stack} />
           </div>
@@ -54,12 +59,13 @@ function Row({ c, open, onToggle }: { c: Component; open: boolean; onToggle: () 
 }
 
 export default function Sheet04Assembly() {
-  const [open, setOpen] = useState<string | null>(null);
+  /* the first component is open on arrival so the sheet never reads as a bare list */
+  const [open, setOpen] = useState<string | null>(COMPONENTS[0]?.pn ?? null);
   return (
     <section id="s04" className="sheet">
       <div className="shd rv">
         <span className="no">SHEET 04</span>
-        <span className="ti">ARTIFACTS · EXPLODED ASSEMBLY</span>
+        <span className="ti">PROJECTS · EXPLODED ASSEMBLY</span>
         <span className="sc">{COMPONENTS.length} COMPONENTS</span>
       </div>
       <h2 className="rv">What came off the bench.</h2>

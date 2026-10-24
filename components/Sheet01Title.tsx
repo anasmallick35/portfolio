@@ -17,8 +17,8 @@ export default function Sheet01Title() {
         <div><div className="k">CURRENT COMPANY</div><div className="v">{P.company}</div></div>
         <div><div className="k">FROM</div><div className="v">{P.from} <em>· {P.tenure}</em></div></div>
         <div><div className="k">BASED IN</div><div className="v">{P.location}</div></div>
-        <div><div className="k">FOCUS</div><div className="v">{P.focus} <em>· {P.focusNote}</em></div></div>
-        <div>
+        <div><div className="k">SHEETS</div><div className="v">{P.sheets}</div></div>
+        <div className="wide">
           <div className="k">EMAIL <em>↗</em></div>
           <div className="v"><a href={`mailto:${P.email}`}>{P.email}</a></div>
         </div>
@@ -31,7 +31,6 @@ export default function Sheet01Title() {
           <div className="k">LINKEDIN <em>↗</em></div>
           <div className="v"><a href={P.linkedinUrl} target="_blank" rel="noopener noreferrer">{P.linkedin}</a></div>
         </div>
-        <div><div className="k">SHEETS</div><div className="v">{P.sheets}</div></div>
       </div>
     </section>
   );

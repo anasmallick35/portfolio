@@ -1,13 +1,23 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { AWARDS, QUARTERS } from "@/data/awards";
 import { svgEl as E } from "@/lib/useReveal";
 import RecordViewer, { type Record } from "./RecordViewer";
 
 export default function Sheet05Recognition() {
   const svgRef = useRef<SVGSVGElement>(null);
+  const recsRef = useRef<HTMLDivElement>(null);
   const [sel, setSel] = useState<number | null>(null);
+
+  /* selecting from the plot has to bring the record it opened into view —
+     otherwise the citation expands somewhere off-screen and nothing appears
+     to happen. Selecting the record itself is already in view, so it stays put. */
+  const selectAndReveal = useCallback((i: number) => {
+    setSel(i);
+    requestAnimationFrame(() =>
+      recsRef.current?.children[i]?.scrollIntoView({ block: "center", behavior: "smooth" }));
+  }, []);
   const [rec, setRec] = useState<Record | null>(null);
 
   useEffect(() => {
@@ -40,7 +50,7 @@ export default function Sheet05Recognition() {
         t2.textContent = "CLICK TO READ"; g.appendChild(t2);
         sv.appendChild(g);
         g.dataset.i = String(o.i);
-        const pick = () => setSel(o.i);
+        const pick = () => selectAndReveal(o.i);
         g.addEventListener("click", pick);
         g.addEventListener("keydown", (e) => {
           if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); }
@@ -55,7 +65,7 @@ export default function Sheet05Recognition() {
       const ql = E("text", { class: "ql", x: cx, y: BASE + 18 }); ql.textContent = q; sv.appendChild(ql);
       sv.appendChild(E("line", { class: "gr", x1: L + colW * (qi + 1), y1: TOP, x2: L + colW * (qi + 1), y2: BASE + 6 }));
     });
-  }, []);
+  }, [selectAndReveal]);
 
   useEffect(() => {
     svgRef.current?.querySelectorAll<SVGGElement>(".unit")
@@ -83,7 +93,7 @@ export default function Sheet05Recognition() {
           <svg ref={svgRef} id="hist" viewBox="0 0 860 250" role="img" aria-label="Recognitions per quarter" />
         </div>
       </div>
-      <div className="recs rv">
+      <div className="recs rv" ref={recsRef}>
         {AWARDS.map((a, i) => (
           <div key={a.name} className={`rec${sel === i ? " sel" : ""}`} role="button" tabIndex={0}
             onClick={(e) => { if (!(e.target as HTMLElement).closest(".view")) setSel(i); }}
