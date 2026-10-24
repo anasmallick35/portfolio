@@ -418,3 +418,6 @@ footer{border-top:1.5px solid var(--ink);margin:0 var(--sp);padding:16px 0 42px;
 
 /* exploded-assembly leader labels (SVG text needs a class to pick up the font var) */
 .cmp svg text{font-family:var(--font-jbm),monospace;font-size:8px;fill:var(--blu)}
+
+/* contact-form honeypot — off-screen rather than display:none, which some bots skip */
+.botcheck{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}

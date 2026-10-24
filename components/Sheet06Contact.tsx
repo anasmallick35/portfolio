@@ -4,8 +4,6 @@ import { useRef, useState, useSyncExternalStore } from "react";
 import { PROFILE as P } from "@/data/profile";
 import { readSent, writeSent, subscribeSent, serverSent } from "@/lib/rfiStore";
 
-const KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "";
-
 type Errors = Partial<Record<"name" | "email" | "message", string>>;
 
 export default function Sheet06Contact() {
@@ -45,17 +43,15 @@ export default function Sheet06Contact() {
        would tell someone "I'll come back to you" about a message that never arrived. */
     let delivered = false;
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          access_key: KEY,
-          subject: `Portfolio RFI — ${d.name}`,
-          from_name: "Portfolio RFI",
-          ...d,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(d),
       });
-      delivered = res.ok && ((await res.json().catch(() => null))?.success ?? false);
+      const out = (await res.json().catch(() => null)) as
+        { ok?: boolean; errors?: Errors } | null;
+      if (res.status === 400 && out?.errors) { setErrs(out.errors); setBusy(false); return; }
+      delivered = res.ok && (out?.ok ?? false);
     } catch { delivered = false; }
 
     setBusy(false);
@@ -87,6 +83,10 @@ export default function Sheet06Contact() {
             <span>ALL FIELDS EXCEPT COMPANY REQUIRED</span>
           </div>
           <div className="fb">
+            {/* honeypot: hidden from people and from assistive tech, so anything
+                that fills it in is a bot. Rejected server-side. */}
+            <input type="text" name="botcheck" tabIndex={-1} autoComplete="off"
+              aria-hidden="true" className="botcheck" />
             <div className={fld("name")}>
               <label htmlFor="f-name">YOUR NAME</label>
               <input id="f-name" name="name" type="text" autoComplete="name" placeholder="Jane Doe" required />

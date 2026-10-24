@@ -57,7 +57,7 @@ library, no animation library, no runtime CSS-in-JS.
 
 ```bash
 npm install
-cp .env.example .env.local   # add your Web3Forms key
+cp .env.example .env.local   # add WEB3FORMS_KEY
 npm run dev                  # http://localhost:3000
 ```
 
@@ -70,14 +70,24 @@ npm run dev                  # http://localhost:3000
 
 ### Contact form
 
-Sheet 06 posts to [Web3Forms](https://web3forms.com) — free, no backend, lands in Gmail.
-Get an access key and set `NEXT_PUBLIC_WEB3FORMS_KEY`. Without it the form still validates
-and shows its success state; it just doesn't send.
+Sheet 06 posts to `/api/contact`, which validates the payload and forwards it to
+[Web3Forms](https://web3forms.com) (free, 250 submissions/month, delivers to Gmail).
+
+The key is deliberately **server-side only** — `WEB3FORMS_KEY`, no `NEXT_PUBLIC_` prefix.
+A key in the client ships in the page source where anyone can lift it and send mail
+through it. Proxying also lets the payload be validated before it leaves and avoids
+browser CORS.
+
+A honeypot field (`botcheck`) is rendered off-screen and rejected server-side; bots that
+fill it get a `200` so they learn nothing.
+
+Without a key the route answers `503`, the form keeps what you typed and offers a direct
+mailto — it never claims a message was delivered when it wasn't.
 
 ## Layout
 
 ```
-app/          layout, page, globals.css, icon
+app/          layout, page, globals.css, icon, api/contact
 components/   PaperCanvas · SheetPlot · Sheet01–06 · RecordViewer
 data/         platform · toolchain · projects · awards · profile
 lib/          useReveal, SVG helpers
