@@ -70,19 +70,25 @@ npm run dev                  # http://localhost:3000
 
 ### Contact form
 
-Sheet 06 posts to `/api/contact`, which validates the payload and forwards it to
-[Web3Forms](https://web3forms.com) (free, 250 submissions/month, delivers to Gmail).
+Sheet 06 posts to `/api/contact`, which validates the payload and sends it as email
+through [Resend](https://resend.com) (free tier: 3,000/month, 100/day).
 
-The key is deliberately **server-side only** — `WEB3FORMS_KEY`, no `NEXT_PUBLIC_` prefix.
-A key in the client ships in the page source where anyone can lift it and send mail
-through it. Proxying also lets the payload be validated before it leaves and avoids
-browser CORS.
+`RESEND_API_KEY` is **server-side only** — no `NEXT_PUBLIC_` prefix — because it is a
+real secret. No domain verification is needed: on the free tier an unverified sender can
+still deliver to the account owner's own address, and that is the only recipient this
+form has. The visitor's address goes in reply-to, so replying from Gmail reaches them.
+
+Web3Forms was the first choice and is the more obvious fit for a static site, but its
+free plan [refuses server-side calls](https://docs.web3forms.com/getting-started/troubleshooting)
+— it expects the access key in the browser, where anyone can lift it — and safelisting a
+rotating serverless IP pool is not workable.
 
 A honeypot field (`botcheck`) is rendered off-screen and rejected server-side; bots that
-fill it get a `200` so they learn nothing.
+fill it get a `200` so they learn nothing. All user input is HTML-escaped before it enters
+the email body.
 
-Without a key the route answers `503`, the form keeps what you typed and offers a direct
-mailto — it never claims a message was delivered when it wasn't.
+Without a key the route answers `503`, and the form keeps what you typed and offers a
+direct mailto — it never claims a message was delivered when it wasn't.
 
 ## Layout
 
