@@ -8,7 +8,7 @@
   --paper:#EAE6DB; --paper-2:#F3F0E8; --ink:#14161A; --body:#3A4049; --dim:#787F8C;
   --rule:#C8C2B4; --rule-2:#DAD5C8;
   --blu:#1B4BA6; --blu-soft:#6E8FCB; --red:#BE3A2A; --grn:#2F6E4F;
-  --stamp:#B33A2B;
+  --ok:#2F6E4F;
   --sp:clamp(20px,5vw,72px);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -100,9 +100,6 @@ strong{color:var(--ink);font-weight:620}
   letter-spacing:.16em;color:var(--dim)}
 .inst .bar b{color:var(--ink);font-weight:400}
 .inst .bd{padding:18px}
-.hintline{font-family:var(--font-jbm),monospace;font-size:9.5px;letter-spacing:.12em;color:var(--blu);
-  display:flex;align-items:center;gap:8px;margin-top:14px}
-.hintline::before{content:"";width:22px;height:1px;background:var(--blu)}
 
 /* ─── SHEET 02 · sectional elevation (experience) ─── */
 #elev{width:100%;height:auto;overflow:visible}
@@ -233,39 +230,6 @@ strong{color:var(--ink);font-weight:620}
 #chart .ev:hover .mk,#chart .ev.sel .mk{fill:var(--red)}
 #chart .ev text{font-family:var(--font-jbm),monospace;font-size:7.5px;fill:var(--red);text-anchor:middle}
 #chart .lbl{font-family:var(--font-jbm),monospace;font-size:7.5px;fill:var(--dim)}
-.cert{border:1.5px solid var(--ink);background:rgba(243,240,232,.86);backdrop-filter:blur(3px);
-  padding:0;cursor:pointer;transition:background .3s;text-align:left;width:100%;display:block}
-.cert+.cert{margin-top:14px}
-.cert:hover,.cert.sel{background:#E9EDF7}
-.cert .ch{display:flex;justify-content:space-between;padding:9px 14px;border-bottom:1px solid var(--rule);
-  font-family:var(--font-jbm),monospace;font-size:8.5px;letter-spacing:.14em;color:var(--dim)}
-.cert .cb{padding:14px}
-.cert .ap{display:inline-block;border:1.5px solid var(--stamp);color:var(--stamp);
-  font-family:var(--font-jbm),monospace;font-size:8px;letter-spacing:.18em;padding:4px 9px;
-  transform:rotate(-2deg);margin-bottom:11px}
-.cert q{display:block;quotes:none;font-size:.88rem;line-height:1.56;color:var(--body);
-  border-left:2px solid var(--rule);padding-left:12px;margin-top:9px;
-  max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.3,.8,.3,1),margin-top .5s}
-.cert.sel q{max-height:260px}
-.cert .sig{font-family:var(--font-jbm),monospace;font-size:8.5px;letter-spacing:.1em;color:var(--dim);margin-top:12px}
-
-/* ─── SHEET 06 · revisions / contact ──────────────── */
-.rev{width:100%;border-collapse:collapse;margin-top:30px;border:1.5px solid var(--ink);
-  background:rgba(243,240,232,.84);backdrop-filter:blur(3px)}
-.rev th{font-family:var(--font-jbm),monospace;font-size:8.5px;letter-spacing:.16em;color:var(--dim);
-  text-align:left;padding:9px 14px;border-bottom:1px solid var(--ink);font-weight:400}
-.rev td{padding:0;border-bottom:1px solid var(--rule-2)}
-.rev tr:last-child td{border-bottom:0}
-.rev a{display:grid;grid-template-columns:40px 1fr auto;gap:14px;padding:13px 14px;
-  text-decoration:none;color:inherit;align-items:center;transition:background .25s;position:relative}
-.rev a:hover,.rev a:focus-visible{background:#E8EDF8}
-
-.rev .rn{font-family:var(--font-jbm),monospace;font-size:9px;color:var(--red)}
-.rev .rd{color:var(--ink);font-variation-settings:"wdth" 104,"wght" 580;font-size:.95rem;
-  word-break:break-all}
-.rev .rd small{display:block;font-family:var(--font-jbm),monospace;font-size:8.5px;letter-spacing:.14em;
-  color:var(--dim);margin-top:2px;font-variation-settings:normal}
-.rev .ra{font-family:var(--font-jbm),monospace;font-size:9px;letter-spacing:.14em;color:var(--blu)}
 
 footer{border-top:1.5px solid var(--ink);margin:0 var(--sp);padding:16px 0 42px;
   max-width:1240px;margin-left:auto;margin-right:auto;
@@ -395,7 +359,7 @@ footer{border-top:1.5px solid var(--ink);margin:0 var(--sp);padding:16px 0 42px;
   margin-top:30px;max-width:780px;padding:26px 22px;display:none}
 .sent.on{display:block;animation:fin .5s cubic-bezier(.2,.85,.25,1)}
 @keyframes fin{from{opacity:0;transform:translateY(10px)}}
-.sent .rs{display:inline-block;border:2px solid var(--stamp);color:var(--stamp);
+.sent .rs{display:inline-block;border:2px solid var(--ok);color:var(--ok);
   font-family:var(--font-jbm),monospace;font-size:11px;letter-spacing:.22em;padding:8px 16px;
   transform:rotate(-2.2deg);margin-bottom:18px}
 .sent h3{font-size:1.2rem}
