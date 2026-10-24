@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect } from "react";
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 
-export type Record = { src: string; name: string; when: string };
+export type Record = { src: StaticImageData; name: string; when: string };
 
 /** The original award, shown on a mounted drafting frame so it reads as a
  *  detail view of the sheet rather than a photo dropped onto it. */
@@ -26,7 +26,9 @@ export default function RecordViewer({ rec, onClose }: { rec: Record | null; onC
           <button className="x" type="button" onClick={onClose} autoFocus>CLOSE ✕</button>
         </div>
         <div className="mb">
-          <Image src={rec.src} alt={`${rec.name}, ${rec.when}`} width={1000} height={944}
+          {/* no explicit width/height — the static import carries the real ones,
+              and the four records are all different shapes */}
+          <Image src={rec.src} alt={`${rec.name}, ${rec.when}`} sizes="(max-width: 880px) 92vw, 880px"
             style={{ width: "100%", height: "auto" }} priority />
         </div>
         <div className="mf">ORIGINAL RECORD · TALVIEW</div>
