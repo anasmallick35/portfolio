@@ -17,7 +17,7 @@ export default function Sheet01Title() {
         <div><div className="k">CURRENT COMPANY</div><div className="v">{P.company}</div></div>
         <div><div className="k">FROM</div><div className="v">{P.from} <em>· {P.tenure}</em></div></div>
         <div><div className="k">BASED IN</div><div className="v">{P.location}</div></div>
-        <div><div className="k">SHEETS</div><div className="v">{P.sheets}</div></div>
+        <div><div className="k">CORE STACK</div><div className="v">{P.stack}</div></div>
         <div className="wide">
           <div className="k">EMAIL <em>↗</em></div>
           <div className="v"><a href={`mailto:${P.email}`}>{P.email}</a></div>

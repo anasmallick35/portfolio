@@ -90,7 +90,7 @@ export default function Sheet05Recognition() {
       </div>
       <h2 className="rv">Recognised every quarter since I joined.</h2>
       <p className="prose rv" style={{ marginTop: 16 }}>
-        Talview runs recognition on a quarterly cycle. I have been named in every one since I started.{" "}
+        Named in every recognition cycle since I started.{" "}
         <strong>Click</strong> a block on the plot, or a record, to read the citation and open the original.
       </p>
       <div className="inst rv">

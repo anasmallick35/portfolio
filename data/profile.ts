@@ -12,5 +12,5 @@ export const PROFILE = {
   githubUrl: "https://github.com/anasmallick35",
   linkedin: "md-anas",
   linkedinUrl: "https://linkedin.com/in/md-anas-552b4323b",
-  sheets: "06",
+  stack: "React · TS · RxDB",
 } as const;
