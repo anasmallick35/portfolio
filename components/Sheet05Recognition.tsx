@@ -5,6 +5,9 @@ import { AWARDS, QUARTERS } from "@/data/awards";
 import { svgEl as E } from "@/lib/useReveal";
 import RecordViewer, { type Record } from "./RecordViewer";
 
+const CTA_IDLE = "CLICK TO READ";
+const CTA_OPEN = "OPEN BELOW \u2193";
+
 export default function Sheet05Recognition() {
   const svgRef = useRef<SVGSVGElement>(null);
   const recsRef = useRef<HTMLDivElement>(null);
@@ -55,8 +58,8 @@ export default function Sheet05Recognition() {
         const g = E("g", { class: "unit", tabindex: "0", role: "button", "aria-label": `${o.a.name}, ${q}` });
         g.appendChild(E("rect", { x: cx - UW / 2, y: y + 1, width: UW, height: UH - 2 }));
         const t1 = E("text", { x: cx, y: y + UH / 2 - 6 }); t1.textContent = o.a.short; g.appendChild(t1);
-        const t2 = E("text", { x: cx, y: y + UH / 2 + 8, "font-size": "6.5", opacity: ".55" });
-        t2.textContent = "CLICK TO READ"; g.appendChild(t2);
+        const t2 = E("text", { class: "sub", x: cx, y: y + UH / 2 + 8, "font-size": "6.5", opacity: ".55" });
+        t2.textContent = CTA_IDLE; g.appendChild(t2);
         sv.appendChild(g);
         g.dataset.i = String(o.i);
         const pick = () => selectAndReveal(o.i);
@@ -77,8 +80,13 @@ export default function Sheet05Recognition() {
   }, [selectAndReveal]);
 
   useEffect(() => {
-    svgRef.current?.querySelectorAll<SVGGElement>(".unit")
-      .forEach((u) => u.classList.toggle("sel", Number(u.dataset.i) === sel));
+    svgRef.current?.querySelectorAll<SVGGElement>(".unit").forEach((u) => {
+      const on = Number(u.dataset.i) === sel;
+      u.classList.toggle("sel", on);
+      /* the open block has already been clicked — point at where its citation went */
+      const sub = u.querySelector("text.sub");
+      if (sub) sub.textContent = on ? CTA_OPEN : CTA_IDLE;
+    });
   }, [sel]);
 
   return (
