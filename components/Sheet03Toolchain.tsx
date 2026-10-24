@@ -85,7 +85,8 @@ export default function Sheet03Toolchain() {
       mkNode(d, CX + Math.cos(a) * R2, CY + Math.sin(a) * R2, "DELIVERY & AGENTS");
     });
 
-    const hg = E("g", { class: "nd host" });
+    /* a label, not a callable part: no .nd, so it gets no hover or pointer */
+    const hg = E("g", { class: "host" });
     hg.appendChild(E("rect", { x: CX - 56, y: CY - 17, width: 112, height: 34 }));
     const ht = E("text", { x: CX, y: CY + 0.5 }); ht.textContent = "MD ANAS"; hg.appendChild(ht);
     gN.appendChild(hg);

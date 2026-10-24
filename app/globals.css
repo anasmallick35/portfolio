@@ -156,8 +156,13 @@ strong{color:var(--ink);font-weight:620}
 #graph .nd.act rect{fill:var(--blu);stroke:var(--blu)}
 #graph .nd.act text{fill:#fff}
 #graph .nd.done rect{fill:#DCE6F8;stroke:var(--blu)}
-#graph .host rect{fill:var(--ink);stroke:var(--ink)}
-#graph .host text{fill:var(--paper);font-size:10px;letter-spacing:.17em}
+/* the centre label is not a callable part — it carries no .nd class, so it needs
+   its own styling and must never pick up the node hover state (which repainted it
+   pale and left the paper-coloured text invisible) */
+#graph .host{pointer-events:none}
+#graph .host rect{fill:var(--ink);stroke:var(--ink);stroke-width:1.4}
+#graph .host text{fill:var(--paper);font-family:var(--font-jbm),monospace;font-size:10px;
+  letter-spacing:.17em;text-anchor:middle;dominant-baseline:middle;user-select:none}
 #graph .pkt{fill:var(--red)}
 #graph .bnum{font-family:var(--font-jbm),monospace;font-size:7px;fill:var(--dim);text-anchor:middle;
   dominant-baseline:middle;pointer-events:none}
