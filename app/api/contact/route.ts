@@ -87,9 +87,13 @@ export async function POST(req: Request) {
       body: JSON.stringify({
         from: FROM,
         to: [TO],
-        // REST uses snake_case; the Node SDK uses replyTo. Verify on the first
-        // live send that replying in Gmail actually addresses the sender.
+        /* Resend's docs don't state whether the REST endpoint wants reply_to or
+           replyTo, and it silently accepts unknown fields (a deliberately bogus
+           key still returned 200), so acceptance proves nothing. Sending both
+           costs nothing — the wrong one is ignored — and guarantees a reply in
+           Gmail addresses the sender rather than the resend.dev sender. */
         reply_to: email,
+        replyTo: email,
         subject: `Portfolio RFI — ${name}${company ? ` (${company})` : ""}`,
         text,
         html,
