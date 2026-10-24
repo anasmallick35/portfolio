@@ -26,10 +26,9 @@ export function readSent(): Sent | null {
   return cachedVal;
 }
 
-export function writeSent(v: Sent | null) {
+export function writeSent(v: Sent) {
   try {
-    if (v) localStorage.setItem(LS_KEY, JSON.stringify(v));
-    else localStorage.removeItem(LS_KEY);
+    localStorage.setItem(LS_KEY, JSON.stringify(v));
   } catch { /* storage unavailable — the in-memory snapshot still updates */ }
   cachedRaw = undefined;
   listeners.forEach((l) => l());

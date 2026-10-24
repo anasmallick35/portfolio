@@ -14,20 +14,6 @@ export default function Sheet06Contact() {
   const formRef = useRef<HTMLFormElement>(null);
   const sentRef = useRef<HTMLDivElement>(null);
 
-  const reset = () => {
-    writeSent(null);
-    setErrs({});
-    setFailed(false);
-    /* The form is not mounted yet at this point — clearing the store is what
-       renders it — so reset() and the scroll have to wait a frame. Without the
-       scroll the form replaces a 246px box with a 481px one and lands partly
-       below the fold, which reads as "nothing happened". */
-    requestAnimationFrame(() => {
-      formRef.current?.reset();
-      formRef.current?.scrollIntoView({ block: "center", behavior: "smooth" });
-    });
-  };
-
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
@@ -147,7 +133,7 @@ export default function Sheet06Contact() {
                 .toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" })
                 .toUpperCase()}
             </span>
-            <button className="again" type="button" onClick={reset}>SEND ANOTHER</button>
+            <span>REPLY GOES TO YOUR INBOX</span>
           </div>
         </div>
       )}

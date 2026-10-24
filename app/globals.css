@@ -367,9 +367,6 @@ footer{border-top:1.5px solid var(--ink);margin:0 var(--sp);padding:16px 0 42px;
 .sent .meta{font-family:var(--font-jbm),monospace;font-size:8.5px;letter-spacing:.14em;color:var(--dim);
   margin-top:16px;border-top:1px solid var(--rule);padding-top:12px;
   display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.sent .again{background:none;border:1px solid var(--ink);color:var(--ink);cursor:pointer;
-  font-family:var(--font-jbm),monospace;font-size:8.5px;letter-spacing:.14em;padding:5px 10px;transition:all .25s}
-.sent .again:hover{background:var(--ink);color:var(--paper)}
 
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:.001ms!important;transition-duration:.001ms!important}
