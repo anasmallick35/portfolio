@@ -54,7 +54,7 @@ export async function POST(req: Request) {
   if (name.length < 2) errors.name = "ENTER YOUR NAME";
   else if (name.length > 120) errors.name = "TOO LONG";
   if (!EMAIL.test(email)) errors.email = "ENTER A VALID EMAIL";
-  if (message.length < 10) errors.message = "AT LEAST 10 CHARACTERS";
+  if (!message) errors.message = "ENTER A MESSAGE";
   else if (message.length > 5000) errors.message = "TOO LONG";
   if (Object.keys(errors).length) {
     return NextResponse.json({ ok: false, errors }, { status: 400 });

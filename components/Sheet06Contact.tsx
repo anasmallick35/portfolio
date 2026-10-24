@@ -29,7 +29,7 @@ export default function Sheet06Contact() {
     const next: Errors = {};
     if (d.name.trim().length < 2) next.name = "ENTER YOUR NAME";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(d.email.trim())) next.email = "ENTER A VALID EMAIL";
-    if (d.message.trim().length < 10) next.message = "AT LEAST 10 CHARACTERS";
+    if (!d.message.trim()) next.message = "ENTER A MESSAGE";
     setErrs(next);
     if (Object.keys(next).length) {
       formRef.current?.querySelector<HTMLElement>(".fld.err input, .fld.err textarea")?.focus();
