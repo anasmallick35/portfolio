@@ -8,7 +8,8 @@ const ALL: Block[] = [...UPPER, ...LOWER];
 
 export default function Sheet02Elevation() {
   const svgRef = useRef<SVGSVGElement>(null);
-  const [sel, setSel] = useState<number | null>(null);
+  /* the first block is open on arrival so the detail panel is never empty */
+  const [sel, setSel] = useState<number | null>(0);
 
   useEffect(() => {
     const sv = svgRef.current;
@@ -107,7 +108,7 @@ export default function Sheet02Elevation() {
       <div className="shd rv">
         <span className="no">SHEET 02</span>
         <span className="ti">RECRUITMENT PLATFORM · SECTIONAL ELEVATION</span>
-        <span className="sc">11 BLOCKS · REV 05</span>
+        <span className="sc">{UPPER.length + LOWER.length} BLOCKS · REV 05</span>
       </div>
       <h2 className="rv">The platform I build on, in section.</h2>
       <p className="prose rv" style={{ marginTop: 16 }}>

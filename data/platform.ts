@@ -28,18 +28,6 @@ export const UPPER: Block[] = [
     g: ["TRIGGER→COND→ACTION", "GROWTHBOOK", "CATALOG-DRIVEN"],
   },
   {
-    k: "EVALUATION",
-    t: "Multi-mode evaluation workspace",
-    d: "Pluggable step types so new evaluation formats drop in without a rewrite, plus in-browser VoIP calling, proctoring session playback, and MediaPipe face verification running client-side.",
-    g: ["PLUGGABLE STEPS", "VoIP", "PROCTORING", "MEDIAPIPE"],
-  },
-  {
-    k: "SCHEDULING",
-    t: "Interview scheduling, end to end",
-    d: "Recruitment drives, calendar and day views, interviewer assignment, candidate self-scheduling and a full RSVP suite — all timezone-correct via Luxon, which is most of the actual difficulty.",
-    g: ["DRIVES", "SELF-SCHEDULING", "RSVP", "LUXON"],
-  },
-  {
     k: "RESUME AI",
     t: "GenAI resume fitment",
     d: "A BlockNote rich-text editor where hiring criteria are split into essentials, preferred and optional — that structured criteria set is what drives the AI resume scoring downstream.",
@@ -65,11 +53,5 @@ export const LOWER: Block[] = [
     t: "Tests, accessibility, internationalization",
     d: "590 Jest and React Testing Library specs, 42 Cypress end-to-end suites, WCAG 2.2 AA compliance enforced with jest-axe, and full internationalization across 1,400+ message keys. The gates are what let a 220k-line module keep moving.",
     g: ["590 SPECS", "42 E2E", "WCAG 2.2 AA", "1,400+ KEYS"],
-  },
-  {
-    k: "OBSERVABILITY",
-    t: "Production instrumentation",
-    d: "Mixpanel analytics, Sentry error tracking and structured logging wired through the module, so a regression is something we see rather than something a customer reports.",
-    g: ["MIXPANEL", "SENTRY", "STRUCTURED LOGS"],
   },
 ];

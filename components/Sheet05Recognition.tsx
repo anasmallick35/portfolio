@@ -8,7 +8,9 @@ import RecordViewer, { type Record } from "./RecordViewer";
 export default function Sheet05Recognition() {
   const svgRef = useRef<SVGSVGElement>(null);
   const recsRef = useRef<HTMLDivElement>(null);
-  const [sel, setSel] = useState<number | null>(null);
+  /* the first award is open on arrival. Set directly rather than through
+     selectAndReveal, which would scroll the page on load. */
+  const [sel, setSel] = useState<number | null>(0);
 
   /* selecting from the plot has to bring the record it opened into view —
      otherwise the citation expands somewhere off-screen and nothing appears
@@ -25,10 +27,17 @@ export default function Sheet05Recognition() {
     if (!sv || sv.childElementCount) return;
 
     const BASE = 196, TOP = 26, L = 58, R = 820;
-    const colW = (R - L) / QUARTERS.length, UH = 46, UW = 118;
+    const colW = (R - L) / QUARTERS.length, UW = 118;
 
-    for (let k = 0; k <= 3; k++) {
-      const y = BASE - (BASE - TOP) * k / 3;
+    /* Scale the axis to the data and make one award exactly one axis unit, so a
+       block's height means what the gridlines say it does. Headroom of one keeps
+       the plot from looking maxed out. */
+    const perQuarter = QUARTERS.map((_, qi) => AWARDS.filter((a) => a.q === qi).length);
+    const MAX = Math.max(2, Math.max(...perQuarter) + 1);
+    const UH = (BASE - TOP) / MAX;
+
+    for (let k = 0; k <= MAX; k++) {
+      const y = BASE - UH * k;
       sv.appendChild(E("line", { class: "gr", x1: L, y1: y, x2: R, y2: y }));
       const t = E("text", { class: "yl", x: L - 8, y: y + 3 }); t.textContent = String(k);
       sv.appendChild(t);
@@ -42,9 +51,9 @@ export default function Sheet05Recognition() {
       const cx = L + colW * qi + colW / 2;
       const inQ = AWARDS.map((a, i) => ({ a, i })).filter((o) => o.a.q === qi);
       inQ.forEach((o, k) => {
-        const y = BASE - (k + 1) * UH - k * 4;
+        const y = BASE - (k + 1) * UH;
         const g = E("g", { class: "unit", tabindex: "0", role: "button", "aria-label": `${o.a.name}, ${q}` });
-        g.appendChild(E("rect", { x: cx - UW / 2, y, width: UW, height: UH }));
+        g.appendChild(E("rect", { x: cx - UW / 2, y: y + 1, width: UW, height: UH - 2 }));
         const t1 = E("text", { x: cx, y: y + UH / 2 - 6 }); t1.textContent = o.a.short; g.appendChild(t1);
         const t2 = E("text", { x: cx, y: y + UH / 2 + 8, "font-size": "6.5", opacity: ".55" });
         t2.textContent = "CLICK TO READ"; g.appendChild(t2);
