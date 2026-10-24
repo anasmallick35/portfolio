@@ -1,5 +1,23 @@
 import type { Metadata, Viewport } from "next";
+import localFont from "next/font/local";
 import "./globals.css";
+
+/* Self-hosted through next/font: one request per face, correctly preloaded,
+   no CDN. Hand-rolling @font-face plus a <link rel="preload"> fetched each
+   face twice because the preload never matched the stylesheet's request. */
+const archivo = localFont({
+  src: "../public/fonts/archivo.woff2",
+  variable: "--font-archivo",
+  weight: "100 900",
+  display: "block",
+});
+
+const jbm = localFont({
+  src: "../public/fonts/jbm.woff2",
+  variable: "--font-jbm",
+  weight: "300 700",
+  display: "block",
+});
 
 const DESC =
   "Md Anas — software engineer at Talview. I build large product interfaces that stay fast " +
@@ -32,11 +50,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preload" href="/fonts/archivo.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="preload" href="/fonts/jbm.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-      </head>
+    <html lang="en" className={`${archivo.variable} ${jbm.variable}`}>
       <body>{children}</body>
     </html>
   );

@@ -14,8 +14,7 @@ function ExplodedView({ stack }: { stack: string[] }) {
             <path d={`M${x} ${y}h92v15h-92Z`} fill="#F3F0E8" stroke="#14161A" strokeWidth="1" />
             <path d={`M${x + 92} ${y}l18 -11v15l-18 11Z`} fill="#DCE2F0" stroke="#14161A" strokeWidth="1" />
             <line x1={x + 118} y1={y - 3} x2={x + 146} y2={y - 3} stroke="#1B4BA6" strokeWidth=".8" />
-            <text x={x + 150} y={y - 0.5} fontFamily="JBM,monospace" fontSize="8"
-              fill="#1B4BA6" dominantBaseline="middle">{s}</text>
+            <text x={x + 150} y={y - 0.5} dominantBaseline="middle">{s}</text>
           </g>
         );
       })}

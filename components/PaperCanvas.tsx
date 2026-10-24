@@ -47,8 +47,10 @@ export default function PaperCanvas() {
     if (!gl) return;
 
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const shaders: WebGLShader[] = [];
     const mk = (type: number, src: string) => {
       const s = gl.createShader(type)!;
+      shaders.push(s);
       gl.shaderSource(s, src);
       gl.compileShader(s);
       if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) console.error(gl.getShaderInfoLog(s));
@@ -107,7 +109,12 @@ export default function PaperCanvas() {
       removeEventListener("resize", resize);
       removeEventListener("pointermove", onMove);
       document.removeEventListener("visibilitychange", onVis);
-      gl.getExtension("WEBGL_lose_context")?.loseContext();
+      /* Free the program but keep the context alive. Losing it here would kill the
+         canvas permanently: getContext() on a remount returns the same lost context,
+         every shader then fails to compile, and the paper never renders again —
+         which is exactly what Strict Mode's double-invoke triggers in development. */
+      gl.deleteProgram(prog);
+      shaders.forEach((sh) => gl.deleteShader(sh));
     };
   }, []);
 
