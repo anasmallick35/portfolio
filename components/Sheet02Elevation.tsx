@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { UPPER, LOWER, type Block } from "@/data/platform";
+import { track } from "@vercel/analytics";
 import { svgEl as E } from "@/lib/useReveal";
 
 const ALL: Block[] = [...UPPER, ...LOWER];
@@ -38,7 +39,7 @@ export default function Sheet02Elevation() {
     const groups: SVGGElement[] = [];
 
     const wire = (g: SVGGElement, i: number) => {
-      const open = () => setSel(i);
+      const open = () => { track("block_opened", { block: ALL[i].k }); setSel(i); };
       g.addEventListener("click", open);
       g.addEventListener("keydown", (e) => {
         if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); }

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { INNER, OUTER, type Part } from "@/data/toolchain";
+import { track } from "@vercel/analytics";
 import { svgEl as E, clamp } from "@/lib/useReveal";
 
 type Node = Part & { x: number; y: number; no: string; ring: string };
@@ -31,6 +32,7 @@ export default function Sheet03Toolchain() {
     const show = (rec: { node: Node; g: SVGGElement; ed: SVGLineElement }) => {
       if (busy) return;
       busy = true;
+      track("part_opened", { part: rec.node.n });
       built.forEach((b) => { b.g.classList.remove("act"); b.ed.classList.remove("lit"); });
       rec.g.classList.add("act");
       rec.ed.classList.add("lit");
@@ -133,7 +135,8 @@ export default function Sheet03Toolchain() {
                       </div>
                     </>
                   )}
-                  <a className="doc" href={sel.u} target="_blank" rel="noopener noreferrer">
+                  <a className="doc" href={sel.u} target="_blank" rel="noopener noreferrer"
+                    onClick={() => track("docs_clicked", { part: sel.n })}>
                     OPEN OFFICIAL DOCS <i>↗</i>
                   </a>
                 </>

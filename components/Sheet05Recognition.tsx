@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { track } from "@vercel/analytics";
 import { AWARDS, QUARTERS } from "@/data/awards";
 import { svgEl as E } from "@/lib/useReveal";
 import RecordViewer, { type Record } from "./RecordViewer";
@@ -19,6 +20,7 @@ export default function Sheet05Recognition() {
      otherwise the citation expands somewhere off-screen and nothing appears
      to happen. Selecting the record itself is already in view, so it stays put. */
   const selectAndReveal = useCallback((i: number) => {
+    track("award_opened", { award: AWARDS[i].name, from: "plot" });
     setSel(i);
     requestAnimationFrame(() =>
       recsRef.current?.children[i]?.scrollIntoView({ block: "center", behavior: "smooth" }));
@@ -113,7 +115,11 @@ export default function Sheet05Recognition() {
       <div className="recs rv" ref={recsRef}>
         {AWARDS.map((a, i) => (
           <div key={a.name} className={`rec${sel === i ? " sel" : ""}`} role="button" tabIndex={0}
-            onClick={(e) => { if (!(e.target as HTMLElement).closest(".view")) setSel(i); }}
+            onClick={(e) => {
+              if ((e.target as HTMLElement).closest(".view")) return;
+              track("award_opened", { award: a.name, from: "record" });
+              setSel(i);
+            }}
             onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setSel(i); } }}>
             <div className="rh"><span>{a.name}</span><b>{QUARTERS[a.q]}</b></div>
             <div className="rb">
@@ -121,7 +127,10 @@ export default function Sheet05Recognition() {
               <p className="sum">{a.sum}</p>
               <q>{a.cite}</q>
               <button className="view" type="button"
-                onClick={() => setRec({ src: a.img, name: a.name, when: QUARTERS[a.q] })}>
+                onClick={() => {
+                  track("record_viewed", { award: a.name });
+                  setRec({ src: a.img, name: a.name, when: QUARTERS[a.q] });
+                }}>
                 VIEW ORIGINAL RECORD ↗
               </button>
             </div>

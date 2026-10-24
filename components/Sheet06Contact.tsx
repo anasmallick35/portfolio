@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useSyncExternalStore } from "react";
+import { track } from "@vercel/analytics";
 import { PROFILE as P } from "@/data/profile";
 import { readSent, writeSent, subscribeSent, serverSent } from "@/lib/rfiStore";
 
@@ -48,7 +49,9 @@ export default function Sheet06Contact() {
     } catch { delivered = false; }
 
     setBusy(false);
-    if (!delivered) { setFailed(true); return; }
+    if (!delivered) { track("rfi_failed"); setFailed(true); return; }
+
+    track("rfi_submitted", { company: d.company?.trim() || "none" });
 
     writeSent({ name: d.name.trim(), at: Date.now() });
     requestAnimationFrame(() => sentRef.current?.scrollIntoView({ block: "center", behavior: "smooth" }));

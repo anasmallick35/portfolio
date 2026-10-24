@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { track } from "@vercel/analytics";
 import { COMPONENTS, type Component } from "@/data/projects";
 
 function ExplodedView({ stack }: { stack: string[] }) {
@@ -75,7 +76,11 @@ export default function Sheet04Assembly() {
       <div className="asm rv">
         {COMPONENTS.map((c) => (
           <Row key={c.pn} c={c} open={open === c.pn}
-            onToggle={() => setOpen(open === c.pn ? null : c.pn)} />
+            onToggle={() => {
+              const next = open === c.pn ? null : c.pn;
+              if (next) track("project_expanded", { project: c.t });
+              setOpen(next);
+            }} />
         ))}
       </div>
     </section>
