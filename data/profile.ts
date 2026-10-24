@@ -1,0 +1,18 @@
+export const PROFILE = {
+  name: "Md Anas",
+  role: "Software Engineer",
+  company: "Talview",
+  from: "2025",
+  tenure: "1 yr",
+  location: "Bengaluru, IN",
+  focus: "Frontend",
+  focusNote: "platform",
+  email: "anasmallick846@gmail.com",
+  phone: "+91 62043 42084",
+  phoneHref: "tel:+916204342084",
+  github: "anasmallick35",
+  githubUrl: "https://github.com/anasmallick35",
+  linkedin: "md-anas",
+  linkedinUrl: "https://linkedin.com/in/md-anas-552b4323b",
+  sheets: "06",
+} as const;
